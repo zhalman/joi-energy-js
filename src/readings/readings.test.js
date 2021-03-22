@@ -37,4 +37,21 @@ describe("readings", () => {
 
         expect(length + 3).toEqual(newLength);
     });
+
+    it("should get readings for last week by id", () => {
+        const mockId = 'mockId'
+        const mockData = {
+            mockId: [
+                { time: 1, reading: 0.1 },
+                { time: 1607686000, reading: 0.2 },
+                { time: 1607686125, reading: 0.3 }
+            ]
+        } 
+        const { getLastWeekReadings } = readings(mockData)
+        const expectedData = [
+            { time: 1607686000, reading: 0.2 },
+            { time: 1607686125, reading: 0.3 }
+        ]
+        expect(getLastWeekReadings(mockId)).toEqual(expectedData)
+    })
 });
